@@ -4,8 +4,11 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { BarChart, type ChartSpec } from './BarChart';
 import { FlowDiagram, type FlowSpec } from './FlowDiagram';
+import { GeneratingScreen } from './GeneratingScreen';
 import { DEMO_HTML, DEMO_QUESTION } from './demoContent';
 import './demoContent.css';
+
+const DEMO_GENERATE_MS = 6800;
 
 function headerLooksLike(text: string, needle: string) {
   return text.toLowerCase().includes(needle);
@@ -24,6 +27,7 @@ export function App() {
   const [chartSpec, setChartSpec] = useState<ChartSpec | null>(null);
   const [flowSpec, setFlowSpec] = useState<FlowSpec | null>(null);
   const [isDemo, setIsDemo] = useState(false);
+  const [demoGenerating, setDemoGenerating] = useState(false);
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState(false);
 
@@ -32,17 +36,25 @@ export function App() {
     setAsked(question);
     setError(undefined);
 
-    // Known showcase question: serve the curated reference page instantly,
-    // with no model call — guaranteed-correct for a live demo.
+    // Known showcase question: fake a short "generating" sequence, then
+    // reveal the curated reference page — no model call, so this is fully
+    // deterministic and immune to live-demo flakiness. The delay is purely
+    // theatrical (the page is already built locally).
     if (normalize(question) === DEMO_QUESTION) {
-      setIsDemo(true);
+      setIsDemo(false);
+      setDemoGenerating(true);
       setAnswer(undefined);
       setChartSpec(null);
       setFlowSpec(null);
+      window.setTimeout(() => {
+        setDemoGenerating(false);
+        setIsDemo(true);
+      }, DEMO_GENERATE_MS);
       return;
     }
 
     setIsDemo(false);
+    setDemoGenerating(false);
     setLoading(true);
     lua
       .api<CompareResponse>('POST', '/compare', { question })
@@ -104,8 +116,8 @@ export function App() {
               if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) ask();
             }}
           />
-          <button className="gask-btn" onClick={ask} disabled={loading || !question.trim()}>
-            {loading ? 'Asking…' : 'Ask'}
+          <button className="gask-btn" onClick={ask} disabled={loading || demoGenerating || !question.trim()}>
+            {loading || demoGenerating ? 'Asking…' : 'Ask'}
           </button>
         </div>
 
@@ -114,6 +126,8 @@ export function App() {
             <p>{error}</p>
           </div>
         )}
+
+        {demoGenerating && <GeneratingScreen durationMs={DEMO_GENERATE_MS} />}
 
         {isDemo && <div className="demo-embed" dangerouslySetInnerHTML={{ __html: DEMO_HTML }} />}
 
