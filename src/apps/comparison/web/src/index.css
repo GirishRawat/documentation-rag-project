@@ -313,6 +313,44 @@
 .gpage .answer th.col-a {
   border-top: 3px solid var(--g-link);
 }
+/* doc images */
+.gpage .answer figure.docimg {
+  margin: 20px 0;
+  padding: 16px;
+  background: var(--g-surface);
+  border: 1px solid var(--g-hairline);
+  border-radius: 16px;
+}
+.gpage .answer figure.docimg img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
+.gpage .answer figure.docimg figcaption {
+  font-size: 12.8px;
+  color: var(--g-text-secondary);
+  margin-top: 12px;
+}
+
+/* the "## Sources" section the persona always appends last gets a footer-like treatment */
+.gpage .answer h2:last-of-type {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--g-hairline);
+}
+.gpage .answer h2:last-of-type::after {
+  display: none;
+}
+.gpage .answer h2:last-of-type + ul {
+  font-size: 13px;
+  color: var(--g-text-secondary);
+}
+.gpage .answer h2:last-of-type + ul a {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+}
+
 /* chart */
 .gpage .chart-card {
   background: #fff;

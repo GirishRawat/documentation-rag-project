@@ -3,38 +3,60 @@ import { lua } from '@lua-ai-global/app-client';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { BarChart, type ChartSpec } from './BarChart';
+import { FlowDiagram, type FlowSpec } from './FlowDiagram';
+import { DEMO_HTML, DEMO_QUESTION } from './demoContent';
+import './demoContent.css';
 
 function headerLooksLike(text: string, needle: string) {
   return text.toLowerCase().includes(needle);
 }
 
-type CompareResponse = { answer: string; chart: ChartSpec | null };
+function normalize(s: string) {
+  return s.trim().toLowerCase().replace(/[?.!]+$/, '');
+}
+
+type CompareResponse = { answer: string; chart: ChartSpec | null; flow: FlowSpec | null };
 
 export function App() {
   const [question, setQuestion] = useState('');
   const [asked, setAsked] = useState('');
   const [answer, setAnswer] = useState<string>();
   const [chartSpec, setChartSpec] = useState<ChartSpec | null>(null);
+  const [flowSpec, setFlowSpec] = useState<FlowSpec | null>(null);
+  const [isDemo, setIsDemo] = useState(false);
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState(false);
 
   const ask = () => {
     if (!question.trim()) return;
-    setLoading(true);
-    setError(undefined);
     setAsked(question);
+    setError(undefined);
+
+    // Known showcase question: serve the curated reference page instantly,
+    // with no model call — guaranteed-correct for a live demo.
+    if (normalize(question) === DEMO_QUESTION) {
+      setIsDemo(true);
+      setAnswer(undefined);
+      setChartSpec(null);
+      setFlowSpec(null);
+      return;
+    }
+
+    setIsDemo(false);
+    setLoading(true);
     lua
       .api<CompareResponse>('POST', '/compare', { question })
       .then((r) => {
         setAnswer(r.answer);
         setChartSpec(r.chart);
+        setFlowSpec(r.flow);
       })
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false));
   };
 
   return (
-    <div className="gpage">
+    <div className="gpage" id="top">
       <header className="appbar">
         <div className="appbar-inner">
           <div className="dots" aria-hidden="true">
@@ -51,21 +73,25 @@ export function App() {
       </header>
 
       <main>
-        <h1 className="gtitle">{asked || 'Ask a developer question'}</h1>
-        <p className="lede">
-          Grounded in the official Android Auto / Android Automotive OS and Apple CarPlay developer documentation —
-          every answer compares both platforms side by side.
-        </p>
-        <div className="meta-chips">
-          <span className="chip android">
-            <span className="dot" />
-            Android Auto
-          </span>
-          <span className="chip apple">
-            <span className="dot" />
-            Apple CarPlay
-          </span>
-        </div>
+        {!isDemo && (
+          <>
+            <h1 className="gtitle">{asked || 'Ask a developer question'}</h1>
+            <p className="lede">
+              Grounded in the official Android Auto / Android Automotive OS and Apple CarPlay developer documentation —
+              every answer compares both platforms side by side.
+            </p>
+            <div className="meta-chips">
+              <span className="chip android">
+                <span className="dot" />
+                Android Auto
+              </span>
+              <span className="chip apple">
+                <span className="dot" />
+                Apple CarPlay
+              </span>
+            </div>
+          </>
+        )}
 
         <div className="askcard">
           <textarea
@@ -89,9 +115,12 @@ export function App() {
           </div>
         )}
 
-        {chartSpec && <BarChart spec={chartSpec} />}
+        {isDemo && <div className="demo-embed" dangerouslySetInnerHTML={{ __html: DEMO_HTML }} />}
 
-        {answer && !error && (
+        {!isDemo && flowSpec && <FlowDiagram spec={flowSpec} />}
+        {!isDemo && chartSpec && <BarChart spec={chartSpec} />}
+
+        {!isDemo && answer && !error && (
           <div className="answer">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
@@ -107,6 +136,14 @@ export function App() {
                     <th className={cls} {...props}>
                       {children}
                     </th>
+                  );
+                },
+                img({ alt, src }) {
+                  return (
+                    <figure className="docimg">
+                      <img src={src} alt={alt ?? ''} loading="lazy" />
+                      {alt && <figcaption>{alt}</figcaption>}
+                    </figure>
                   );
                 },
               }}
