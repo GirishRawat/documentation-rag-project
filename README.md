@@ -16,10 +16,10 @@ Developer docs for the two platforms are written independently, in different sty
 
 ## Architecture
 
-- **Ingestion (one-time, done outside the agent):** source doc pages are scraped and saved as clean Markdown/text files under `docs/android-auto/` and `docs/carplay/`, then uploaded to the agent's knowledge base via `lua resources`.
-- **Retrieval:** Lua's built-in RAG feature (`lua features enable --feature-name rag`) — not a custom search tool.
-- **Answer + page generation:** a single custom tool (`generate_comparison_page`) that retrieves from the knowledge base, calls the model to write the comparison, renders HTML, and returns a link to the generated page.
-- No jobs, webhooks, or workflows — this is single-tool-call Q&A, intentionally kept minimal for the hackathon scope.
+- **Ingestion (one-time, done outside the agent):** source doc pages were scraped, saved as clean Markdown files under `docs/android-auto/` and `docs/carplay/`, then consolidated into two summarized files (`docs/*-consolidated.md`) and uploaded to the agent's knowledge base via `lua resources` (dashboard upload).
+- **Retrieval:** Lua's built-in RAG feature (already active on this agent) — no custom search tool.
+- **Answer shape:** no custom tool at all. The persona (`src/index.ts`) instructs the agent to answer every substantive question with a natural-language explanation plus a Markdown comparison table (Android Auto vs. Apple CarPlay), relying entirely on the platform's RAG retrieval — the answer lives in the chat response itself.
+- No skills, tools, jobs, webhooks, or workflows — this is a persona-only agent.
 
 See the `lua-agent-builder` plugin skills (`.agents/skills/`, symlinked for Claude Code under `.claude/skills/`) for the build tooling this project uses: `lua-init`, `lua-new`, `lua-test`, `lua-push`, `lua-deploy`, etc.
 
@@ -29,8 +29,7 @@ See the `lua-agent-builder` plugin skills (`.agents/skills/`, symlinked for Clau
 - [x] Agent-builder skills/plugin installed
 - [x] Doc pages scraped (65 files: `docs/android-auto/`, `docs/carplay/`)
 - [x] Agent project scaffolded (`lua-init` — agent `car-docs-rag`, org `lua-hackathon`)
-- [ ] Doc pages uploaded as resources
-- [ ] `generate_comparison_page` tool built and tested
+- [x] Doc pages consolidated and uploaded to the knowledge base (5 resources)
 - [ ] End-to-end sandbox demo
 
 ## Project layout
@@ -57,11 +56,10 @@ lua auth configure
 lua status --json --ci
 ```
 
-Local iteration loop once a tool exists:
+Try it in sandbox chat:
 
 ```bash
 lua compile
-lua test skill --name generate_comparison_page --input '{"question":"..."}'
 lua chat --ci -e sandbox -m "Compare how Android Auto and CarPlay handle navigation UI" -t demo-1
 ```
 
