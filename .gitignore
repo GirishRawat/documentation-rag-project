@@ -1,0 +1,8 @@
+dist-v2/
+dist/
+node_modules/
+.env
+.env.local
+.DS_Store
+Thumbs.db
+.claude/scheduled_tasks.lock

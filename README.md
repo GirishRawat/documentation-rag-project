@@ -16,7 +16,7 @@ Developer docs for the two platforms are written independently, in different sty
 
 ## Architecture
 
-- **Ingestion (one-time, done outside the agent):** source doc pages are scraped and saved as clean Markdown/text files, tagged by platform (`android-auto-*`, `carplay-*`), then uploaded to the agent's knowledge base via `lua resources`.
+- **Ingestion (one-time, done outside the agent):** source doc pages are scraped and saved as clean Markdown/text files under `docs/android-auto/` and `docs/carplay/`, then uploaded to the agent's knowledge base via `lua resources`.
 - **Retrieval:** Lua's built-in RAG feature (`lua features enable --feature-name rag`) — not a custom search tool.
 - **Answer + page generation:** a single custom tool (`generate_comparison_page`) that retrieves from the knowledge base, calls the model to write the comparison, renders HTML, and returns a link to the generated page.
 - No jobs, webhooks, or workflows — this is single-tool-call Q&A, intentionally kept minimal for the hackathon scope.
@@ -27,10 +27,22 @@ See the `lua-agent-builder` plugin skills (`.agents/skills/`, symlinked for Clau
 
 - [x] Lua account authenticated, lua-cli installed
 - [x] Agent-builder skills/plugin installed
-- [ ] Doc pages scraped and uploaded as resources
-- [ ] Agent project scaffolded (`lua-init`)
+- [x] Doc pages scraped (65 files: `docs/android-auto/`, `docs/carplay/`)
+- [x] Agent project scaffolded (`lua-init` — agent `car-docs-rag`, org `lua-hackathon`)
+- [ ] Doc pages uploaded as resources
 - [ ] `generate_comparison_page` tool built and tested
 - [ ] End-to-end sandbox demo
+
+## Project layout
+
+```
+docs/
+  android-auto/   # 39 scraped Android Auto / Automotive OS doc pages (Markdown)
+  carplay/        # 26 scraped Apple CarPlay doc pages + Developer Guide PDF (Markdown)
+src/
+  index.ts        # the LuaAgent definition (persona, skills, model)
+lua.skill.yaml    # CLI-managed state (agentId/orgId, versions) — do not hand-edit
+```
 
 ## Getting started
 
@@ -45,9 +57,10 @@ lua auth configure
 lua status --json --ci
 ```
 
-Once the agent is scaffolded, local iteration uses:
+Local iteration loop once a tool exists:
 
 ```bash
+lua compile
 lua test skill --name generate_comparison_page --input '{"question":"..."}'
 lua chat --ci -e sandbox -m "Compare how Android Auto and CarPlay handle navigation UI" -t demo-1
 ```
