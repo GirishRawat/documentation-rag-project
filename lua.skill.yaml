@@ -7,4 +7,8 @@ jobs: []
 preprocessors: []
 postprocessors: []
 mcpServers: []
+webApps:
+  - name: comparison
+    version: 1.0.0
+    webAppId: ''
 workflows: []

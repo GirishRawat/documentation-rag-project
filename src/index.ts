@@ -1,4 +1,5 @@
 import { LuaAgent } from 'lua-cli';
+import comparison from './apps/comparison/app';
 
 /**
  * Your Lua AI Agent
@@ -40,6 +41,8 @@ Precise and technical. Keep the prose explanation focused; let the table carry t
 
   // Add your skills here
   skills: [],
+
+  webApps: [comparison],
 
   // Optional: Add webhooks for external integrations
   // webhooks: [],

@@ -1,0 +1,43 @@
+@import '@lua-ai-global/ui/styles.css';
+/* Tailwind scans the design system's compiled components for the classes they use. */
+@source '../node_modules/@lua-ai-global/ui/dist';
+
+.markdown-answer table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+}
+.markdown-answer th,
+.markdown-answer td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+.markdown-answer th {
+  background: var(--card);
+  font-weight: 600;
+}
+.markdown-answer h1,
+.markdown-answer h2,
+.markdown-answer h3 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.markdown-answer p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+.markdown-answer code {
+  background: var(--card);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+.markdown-answer ul,
+.markdown-answer ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
