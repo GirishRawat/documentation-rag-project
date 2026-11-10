@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "skills": {
+    "lua-agent-builder": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-agent-builder/SKILL.md",
+      "computedHash": "97789dc14776e7f9a335d7df866732b10bf1a0594a1cd32dc65afcaeabfdfe70"
+    },
+    "lua-architect": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-architect/SKILL.md",
+      "computedHash": "1db2a6f4c594bce874cb61d4fedd8dc249d525a9033edcb9f81a2881656e5757"
+    },
+    "lua-audit": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-audit/SKILL.md",
+      "computedHash": "cb4d168f89390e2eeb661bec396d5aa71c5e7a6e75f636dfa207cf45186e419c"
+    },
+    "lua-auth": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-auth/SKILL.md",
+      "computedHash": "c6522a5e8c0ba972c7cef518d44169922603133ee861b88d6662298724ec6d97"
+    },
+    "lua-browser": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-browser/SKILL.md",
+      "computedHash": "1e08003b781c2c07ebec3bcc0d249d3fc5d0e8b703132f463ecd52fb25f6987f"
+    },
+    "lua-chat": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-chat/SKILL.md",
+      "computedHash": "21d1f8ebcc11d44927f32503683c8d22db9efef1223a53c6e4ab721ff0867c9c"
+    },
+    "lua-decisions": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-decisions/SKILL.md",
+      "computedHash": "023df5ed77310cb65cd1ff1014e3cc4b0ec228d4dc0bdf68938b30edaaaff547"
+    },
+    "lua-deploy": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-deploy/SKILL.md",
+      "computedHash": "cf12f2ce3d481369038277aa927a0c6317d257ac1e0e73fbeec61b3f1f63d1b3"
+    },
+    "lua-devices": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-devices/SKILL.md",
+      "computedHash": "673a5ed1fe303115c79d2c3c6e6d78b3c96683be60582fe7fea8cfeed72b800a"
+    },
+    "lua-docs": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-docs/SKILL.md",
+      "computedHash": "e945768d9491829d14f9fa4502fb3944e1d10bc56c3466411b8992bcf6cb2026"
+    },
+    "lua-doctor": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-doctor/SKILL.md",
+      "computedHash": "d8bcc7333174957537a8c6cd98f1289a90bee135cedf20277acf8ed849675a07"
+    },
+    "lua-drains": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-drains/SKILL.md",
+      "computedHash": "b0d1809785fa7308125fd800f0ee339c4287947977a40e8e217627e4660d9c0f"
+    },
+    "lua-env": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-env/SKILL.md",
+      "computedHash": "207b9cd81c1ef24408b963c19b3f8220f7f2e1b7303423edf6e03d83e6af7c0e"
+    },
+    "lua-init": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-init/SKILL.md",
+      "computedHash": "9d9a2ffbd77ed2a34303b9af1f69ad3512cc24fcf4a4e21bde55b68bb4c4d9d6"
+    },
+    "lua-integrations": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-integrations/SKILL.md",
+      "computedHash": "fc7fa09bb4a1142c23127331575eb7d58424bc9667574eebe9a030feccd2d508"
+    },
+    "lua-logs": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-logs/SKILL.md",
+      "computedHash": "657a82988bf1b288cf491877cd1e76b2999c0db393471c7cb650ec94452e97d3"
+    },
+    "lua-new": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-new/SKILL.md",
+      "computedHash": "a96a2f603266e0e4a32493afbb1a082c1487ac769869a5559e24238826d48350"
+    },
+    "lua-push": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-push/SKILL.md",
+      "computedHash": "2cdf4a96179e7283f91189d40db546f8b9f22f8fcd51cb5baf482aa362ab5e22"
+    },
+    "lua-status": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-status/SKILL.md",
+      "computedHash": "3802ec7b5f000caa2ed57b82177d4075b419a4e7f6e829a56471695c5b528bc9"
+    },
+    "lua-sync": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-sync/SKILL.md",
+      "computedHash": "542e01a9fd33f77f9338c3fd39ad6f40eb5a731f98a4e7f240a22c7c96056879"
+    },
+    "lua-template": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-template/SKILL.md",
+      "computedHash": "a2f6c9e95cb8d60f5781aab7db1e7fe951e013c102965f22f9c78d8d7389d98f"
+    },
+    "lua-test": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-test/SKILL.md",
+      "computedHash": "f9691a97670d61b5b10c33cc4263de5b5c0e47099136223fe9ddc894f4517479"
+    },
+    "lua-update": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-update/SKILL.md",
+      "computedHash": "8120d8059328d72650e9afaf17dc2a641cad087ecf79ad4840069ae8967319e0"
+    },
+    "lua-version": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-version/SKILL.md",
+      "computedHash": "83897c443ea1a8e7f950ebf957351386bc3abb05fa3ac5673c2bb73090269969"
+    },
+    "lua-workflow": {
+      "source": "lua-ai-global/agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/lua-workflow/SKILL.md",
+      "computedHash": "09bc5a6fb65d8126261ef057200c6a66c349883caada5103bd26e1bdef19844c"
+    }
+  }
+}
