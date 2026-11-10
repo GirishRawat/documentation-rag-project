@@ -1,43 +1,352 @@
 @import '@lua-ai-global/ui/styles.css';
 /* Tailwind scans the design system's compiled components for the classes they use. */
 @source '../node_modules/@lua-ai-global/ui/dist';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+@import '@fontsource/roboto/700.css';
+@import '@fontsource/roboto-mono/400.css';
+@import '@fontsource/roboto-mono/500.css';
 
-.markdown-answer table {
+/* ── Google-consistent theme (light mode) ─────────────────── */
+:root {
+  --g-bg: #ffffff;
+  --g-surface: #f8f9fa;
+  --g-hairline: #dadce0;
+  --g-text-primary: #202124;
+  --g-text-secondary: #5f6368;
+  --g-link: #1a73e8;
+  --g-link-hover: #0b57d0;
+  --g-blue: #4285f4;
+  --g-red: #ea4335;
+  --g-yellow: #fbbc05;
+  --g-green: #34a853;
+  --g-android-green: #3ddc84;
+  --g-code-bg: #1e1f20;
+  --g-code-text: #e8eaed;
+}
+
+.gpage {
+  background: var(--g-bg);
+  color: var(--g-text-primary);
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+.gpage a {
+  color: var(--g-link);
+}
+.gpage a:hover {
+  color: var(--g-link-hover);
+}
+
+/* app bar */
+.gpage .appbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff;
+  border-bottom: 1px solid var(--g-hairline);
+}
+.gpage .appbar-inner {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.gpage .dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex: none;
+}
+.gpage .dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.gpage .dots .b {
+  background: var(--g-blue);
+}
+.gpage .dots .r {
+  background: var(--g-red);
+}
+.gpage .dots .y {
+  background: var(--g-yellow);
+}
+.gpage .dots .g {
+  background: var(--g-green);
+}
+.gpage .appbar-title {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+.gpage .appbar-title .sep {
+  color: var(--g-text-secondary);
+  font-weight: 400;
+  margin: 0 6px;
+}
+.gpage .appbar-title .sub {
+  color: var(--g-text-secondary);
+  font-weight: 400;
+}
+
+/* layout */
+.gpage main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+.gpage h1.gtitle {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+}
+.gpage .lede {
+  font-size: 15.5px;
+  color: var(--g-text-secondary);
+  max-width: 720px;
+  margin-bottom: 20px;
+}
+.gpage .meta-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.gpage .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--g-surface);
+  color: var(--g-text-secondary);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+.gpage .chip.android {
+  color: #1e8e3e;
+  background: #e6f4ea;
+}
+.gpage .chip.apple {
+  color: #174ea6;
+  background: #e8f0fe;
+}
+.gpage .chip .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+}
+.gpage .chip.android .dot {
+  background: var(--g-android-green);
+}
+.gpage .chip.apple .dot {
+  background: var(--g-link);
+}
+
+/* ask card */
+.gpage .askcard {
+  background: var(--g-surface);
+  border: 1px solid var(--g-hairline);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 36px;
+}
+.gpage textarea.gask {
+  width: 100%;
+  border: 1px solid var(--g-hairline);
+  border-radius: 10px;
+  background: #fff;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--g-text-primary);
+  resize: vertical;
+}
+.gpage textarea.gask:focus {
+  outline: 2px solid var(--g-link);
+  outline-offset: 1px;
+}
+.gpage button.gask-btn {
+  margin-top: 12px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: var(--g-link);
+  border: none;
+  border-radius: 999px;
+  padding: 9px 22px;
+  cursor: pointer;
+}
+.gpage button.gask-btn:hover {
+  background: var(--g-link-hover);
+}
+.gpage button.gask-btn:disabled {
+  background: var(--g-hairline);
+  color: var(--g-text-secondary);
+  cursor: default;
+}
+
+/* answer content */
+.gpage .answer h1,
+.gpage .answer h2,
+.gpage .answer h3 {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+.gpage .answer h2 {
+  font-size: 22px;
+  margin: 36px 0 6px;
+}
+.gpage .answer h2:first-child {
+  margin-top: 0;
+}
+.gpage .answer h2::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 3px;
+  border-radius: 2px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, var(--g-blue) 0 25%, var(--g-red) 25% 50%, var(--g-yellow) 50% 75%, var(--g-green) 75% 100%);
+}
+.gpage .answer h3 {
+  font-size: 16.5px;
+  margin: 24px 0 8px;
+}
+.gpage .answer p {
+  margin: 10px 0;
+}
+.gpage .answer ul,
+.gpage .answer ol {
+  margin: 10px 0 10px 26px;
+}
+.gpage .answer li {
+  margin: 6px 0;
+}
+.gpage .answer strong {
+  font-weight: 700;
+}
+.gpage .answer blockquote {
+  background: var(--g-surface);
+  border: 1px solid var(--g-hairline);
+  border-left: 4px solid var(--g-blue);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: var(--g-text-secondary);
+}
+.gpage .answer blockquote p {
+  margin: 0;
+}
+.gpage .answer code {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 13px;
+  background: var(--g-surface);
+  border: 1px solid var(--g-hairline);
+  border-radius: 5px;
+  padding: 1px 6px;
+  color: #188038;
+  white-space: nowrap;
+}
+.gpage .answer pre {
+  background: var(--g-code-bg);
+  color: var(--g-code-text);
+  border-radius: 8px;
+  margin: 16px 0;
+  padding: 16px 18px;
+  overflow-x: auto;
+}
+.gpage .answer pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--g-code-text);
+  white-space: pre;
+}
+
+/* tables */
+.gpage .answer table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1rem 0;
-  font-size: 0.875rem;
+  margin: 18px 0;
+  font-size: 13.8px;
+  background: #fff;
+  border: 1px solid var(--g-hairline);
+  border-radius: 12px;
+  overflow: hidden;
 }
-.markdown-answer th,
-.markdown-answer td {
-  border: 1px solid var(--border);
-  padding: 0.5rem 0.75rem;
+.gpage .answer th {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 600;
   text-align: left;
+  background: var(--g-surface);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--g-hairline);
+  font-size: 13.5px;
+}
+.gpage .answer td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--g-hairline);
   vertical-align: top;
 }
-.markdown-answer th {
-  background: var(--card);
+.gpage .answer tr:last-child td {
+  border-bottom: none;
+}
+.gpage .answer tbody tr:hover td {
+  background: var(--g-surface);
+}
+.gpage .answer th.col-g {
+  border-top: 3px solid var(--g-android-green);
+}
+.gpage .answer th.col-a {
+  border-top: 3px solid var(--g-link);
+}
+/* chart */
+.gpage .chart-card {
+  background: #fff;
+  border: 1px solid var(--g-hairline);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 20px 0 28px;
+}
+.gpage .chart-title {
+  font-family: 'Roboto', Arial, sans-serif;
   font-weight: 600;
+  font-size: 14.5px;
+  margin-bottom: 14px;
 }
-.markdown-answer h1,
-.markdown-answer h2,
-.markdown-answer h3 {
-  margin-top: 1.25rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+.gpage .chart-legend {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 12px;
+  font-size: 12.5px;
+  color: var(--g-text-secondary);
 }
-.markdown-answer p {
-  margin: 0.5rem 0;
-  line-height: 1.6;
+.gpage .chart-legend .sw {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 6px;
+  vertical-align: -1px;
 }
-.markdown-answer code {
-  background: var(--card);
-  padding: 0.1rem 0.3rem;
-  border-radius: 4px;
-  font-size: 0.85em;
-}
-.markdown-answer ul,
-.markdown-answer ol {
-  margin: 0.5rem 0;
-  padding-left: 1.5rem;
+
+.gpage .error-card {
+  background: #fce8e6;
+  border: 1px solid #f6c7c2;
+  color: #c5221f;
+  border-radius: 12px;
+  padding: 16px 20px;
 }
